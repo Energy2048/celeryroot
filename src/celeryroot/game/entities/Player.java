@@ -254,15 +254,15 @@ public class Player {
         else if (jumpGraceTimer > 0f)
             jumpGraceTimer -= Game.deltaTime;
         //dash timers
-        if(dashAttackTimer > 0f)
-            dashAttackTimer -= Game.deltaTime;
-        if(dashCoolDownTimer > 0f)
-            dashCoolDownTimer -= Game.deltaTime;
-        if(dashRefillCooldownTimer > 0f) //cooldown after dashing before getting dash back on ground
+
+        dashAttackTimer -= Game.deltaTime;
+        dashCoolDownTimer -= Game.deltaTime;
+        if (dashRefillCooldownTimer > 0f){
             dashRefillCooldownTimer -= Game.deltaTime;
-        else{
+        } else {
             tryRefillDash();
         }
+
         dashAim = inputs.getDashAim(facing); //this should maybe be moved?
         //jump
         if(varJumpTimer > 0f)
