@@ -37,8 +37,7 @@ public class StalkThread implements Runnable{
     public StalkThread(int threadID){
         id = threadID;
     }
-
-
+    
     @Override
     public void run() {
         //main loop
@@ -53,7 +52,8 @@ public class StalkThread implements Runnable{
                 } catch (Exception ignored) {
                 }
             }
-
+    
+    //Config.cycle();
 
             //otherwise find a cell to branch off of
             CellPos indexPos;
@@ -157,14 +157,15 @@ public class StalkThread implements Runnable{
         saveGame.copyFrom(tickGame); //save state
 
         //start branching
+        short[] branchInputs = new short[Config.branchInputLength];
         for (int branch = 0; branch < Config.branchInputCount; ++branch) {
             ++rerecordCount;
             tickGame.copyFrom(saveGame); //loadstate
             testPos.set(cellPos); //if we leave this cell then we've found smthn new
-            short[] branchInputs = new short[Config.branchInputLength];
             //old celery would tick frames where the player didnt update for free(mostly so transitions didn't confuse it)
             //but since only 1 room here im going to Not Do That and hope there wasn't another reason i'm forgetting
-            for (int f = 0; f < Config.branchInputLength; ++f) {
+            for (int f = 0; f < branchInputs.length; ++f) {
+            //for (int f = 0; f < Config.branchInputLength; ++f) {
                 branchInputs[f] = Config.inputFiddler(tickGame, masterRandom);
                 tickGame.tick();
                 ++frameCount;
@@ -248,6 +249,7 @@ public class StalkThread implements Runnable{
         Config.assignCell(tickGame, startCell); //cell we're starting from
 
         //now do the modifying stuffz
+        
         for (int branch = 0; branch < Config.branchInputCount; ++branch) {
             ++rerecordCount;
             tickGame.copyFrom(saveGame); //loadstate
