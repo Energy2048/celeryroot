@@ -1,5 +1,6 @@
 package celeryroot.celery.config;
-
+import celeryroot.celery.Celery;
+import celeryroot.celery.StalkThread;
 import celeryroot.celery.CellPos;
 import celeryroot.game.Game;
 import celeryroot.game.entities.Player;
@@ -111,13 +112,7 @@ state = 0
     //executed after each frame to see if it should stop pursuing the current branch(by return true)
     //so basically descrribes any "oob" or restrictions like min speed/dashes or death
     public static boolean trimBranch(Game game){
-        float realXSpeed = game.player.getRealXSpeed();
-        float realYSpeed = game.player.getRealYSpeed();
-
-        if(realXSpeed < 0) return true;
-        if(game.player.x > 175 && game.player.y > 88) return true;
-
-        //default obviously good things to have
+        if(game.time > Celery.globalBestScore) return true;
         if(!bounds.intersects(game.player.x, game.player.y)) return true;
         if(game.player.dead) return true;
         return false;
