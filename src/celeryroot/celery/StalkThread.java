@@ -52,8 +52,6 @@ public class StalkThread implements Runnable{
                 } catch (Exception ignored) {
                 }
             }
-    
-    //Config.cycle();
 
             //otherwise find a cell to branch off of
             CellPos indexPos;
