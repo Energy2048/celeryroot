@@ -24,7 +24,7 @@ public class StartInfo {
     public boolean autoJump;
     public float maxFall;
     public int dashes;
-    public int maxDashes = 1;
+    public int maxDashes;
     public float dashCooldownTimer;
     public float dashAttackTimer;
     public Vec2f dashDir = new Vec2f();
@@ -63,6 +63,8 @@ public class StartInfo {
                     start.maxFall = Float.parseFloat(m.group(1))),
             new Regexer("dashes", "dashes\\s*=\\s*(\\d+)", (start, m) ->
                     start.dashes = Integer.parseInt(m.group(1))),
+            new Regexer("maxDashes", "maxDashes\\s*=\\s*(\\d+)", (start, m) ->
+                    start.maxDashes = Integer.parseInt(m.group(1))),
             new Regexer("dashCooldownTimer", "dashCool\\s*=\\s*(-?\\d+\\.\\d+)", (start, m) ->
                     start.dashCooldownTimer = Float.parseFloat(m.group(1))),
             new Regexer("dashAttackTimer", "dashAttack\\s*=\\s*(-?\\d+\\.\\d+)", (start, m) ->
